@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 208913416}
   - component: {fileID: 208913415}
   - component: {fileID: 208913414}
+  - component: {fileID: 208913417}
   m_Layer: 0
   m_Name: player_walk
   m_TagString: Untagged
@@ -228,6 +229,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &208913417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208913413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d945180231073444593fa938194a65e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedAmount: 8
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
