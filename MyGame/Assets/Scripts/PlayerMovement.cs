@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rgb;
+    Rigidbody2D rgb;
     Vector3 velocity;
+    
     public float speedAmount;
+    public float jumpAmount;
+
     void Start()
     {
-        rgb = GetComponent<Rigidbody>();
+        rgb = GetComponent<Rigidbody2D>();
     }
     
     void Update()
     {
         velocity = new Vector3(Input.GetAxis("Horizontal"), 0f);
         transform.position += velocity * speedAmount * Time.deltaTime;
+
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && Mathf.Approximately(rgb.velocity.y, 0))
+        {
+            rgb.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);
+        }
     }
 }
