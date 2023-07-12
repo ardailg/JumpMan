@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position += velocity * speedAmount * Time.deltaTime;
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && Mathf.Approximately(rgb.velocity.y, 0))
-        {
+        { //Mathf fonksiyonuyla karakterin yere düşmeden tekrar zıplaması engellendi, yere temas ettikten sonra zıplayabiliyor
             rgb.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);
         }
     }
