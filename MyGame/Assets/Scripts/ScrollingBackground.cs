@@ -27,6 +27,4 @@ public class ScrollingBackground : MonoBehaviour
             backgroundTransform.position = startPosition;
         } 
     }
-    
-    
 }
