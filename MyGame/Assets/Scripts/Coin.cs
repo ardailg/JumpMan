@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
 
     void CheckCoinsPosition()
     {
-        if (transform.position.x <= -15) // Modify the condition as per your desired position
+        if (transform.position.x <= -15) // Yaratılan coinler oyun alanından çıktıktan sonra -15 konumuna gelince tekrar object poola dönüyor 
             {
                 gameObject.SetActive(false);
                 ObjectPool.instance.pooledObjects.Add(gameObject);
