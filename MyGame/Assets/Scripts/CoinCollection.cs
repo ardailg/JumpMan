@@ -10,9 +10,10 @@ public class CoinCollection : MonoBehaviour
     public Transform character; // Karakterin transform bileşeni
     public Transform[] coins; // Coin'lerin transform bileşenleri
     public float minDistance;
-    
-    public TextMeshProUGUI CoinCountText;
-    private int coinCount = 0;
+    public Transform spawnPoint;
+    public float verticalOffset;
+
+    private Score score;
     void Start()
     {
         GameObject[] coinObjects = GameObject.FindGameObjectsWithTag("Coin");
@@ -22,6 +23,8 @@ public class CoinCollection : MonoBehaviour
         {
             coins[i] = coinObjects[i].transform;
         }
+
+        score = FindObjectOfType<Score>(); // Score script'ini bul ve referans al
     }
 
     void Update()
@@ -41,7 +44,9 @@ public class CoinCollection : MonoBehaviour
         coin.SetActive(false);
         ObjectPool.instance.pooledObjects.Add(coin);
         
-        coinCount++;
-        CoinCountText.text = "Score: " + coinCount;
+        Vector3 spawnPosition = spawnPoint.position + new Vector3(0f, verticalOffset, 0f);
+        coin.transform.position = spawnPosition;
+        
+        score.UpdateScore();
     }
 }
