@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinSpawn : MonoBehaviour
+public class EnemySpawn : MonoBehaviour
 {
     public Transform spawnPoint;
     public float minSpawnInterval;
     public float maxSpawnInterval;
-    public float coinSpeed;
+    public float enemySpeed;
 
     private float timer;
     private float spawnInterval;
 
-    public ObjectPool ObjectPool;
+    public ObjectPoolEnemy ObjectPoolEnemy;
 
     void Start()
     {
@@ -25,7 +25,7 @@ public class CoinSpawn : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            SpawnCoin();
+            SpawnEnemy();
             ResetTimer();
         }
     }
@@ -36,20 +36,19 @@ public class CoinSpawn : MonoBehaviour
         spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
     
-    void SpawnCoin()
+    void SpawnEnemy()
     {
-        GameObject newCoin = ObjectPool.GetPooledObject();
+        GameObject newEnemy = ObjectPoolEnemy.GetPooledObject();
 
-        if (newCoin != null)
+        if (newEnemy != null)
         {
-            float verticalOffset = Random.Range(-1.5f, 2f);
-            Vector3 spawnPosition = spawnPoint.position + new Vector3(0f, verticalOffset, 0f);
-            newCoin.transform.position = spawnPosition;
+            Vector3 spawnPosition = spawnPoint.position;
+            newEnemy.transform.position = spawnPosition;
             
-            newCoin.SetActive(true);
+            newEnemy.SetActive(true);
 
-            Rigidbody2D rgb = newCoin.GetComponent<Rigidbody2D>();
-            rgb.velocity = Vector2.left * coinSpeed;
+            Rigidbody2D rgb = newEnemy.GetComponent<Rigidbody2D>();
+            rgb.velocity = Vector2.left * enemySpeed;
         }
     }
 }
