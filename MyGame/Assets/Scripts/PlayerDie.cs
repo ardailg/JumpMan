@@ -7,6 +7,7 @@ public class PlayerDie : MonoBehaviour
     public Transform character;
     public Transform[] enemies;
     public float deathDistance;
+    public BackgroundController backgroundController;
 
     void Start()
     {
@@ -35,9 +36,12 @@ public class PlayerDie : MonoBehaviour
         }
     }
 
-    void CharacterDeath()
+    public void CharacterDeath()
     {
         character.gameObject.SetActive(false);
         //Debug.Log("Player Died!");
+        backgroundController.StopBackground();
+        
+        GameManager.instance.OnGameOver(); // Singleton kullanarak çağırdım (instance)
     }
 }

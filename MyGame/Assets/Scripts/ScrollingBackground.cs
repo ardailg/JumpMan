@@ -23,8 +23,7 @@ public class ScrollingBackground : MonoBehaviour
         if (backgroundTransform.position.x < -17.73)
         {
             Vector3 startPosition = new Vector3(0, 0, 0);
-
             backgroundTransform.position = startPosition;
-        } 
+        }
     }
 }
