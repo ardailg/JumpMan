@@ -25,8 +25,11 @@ public class CoinSpawn : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            SpawnCoin();
-            ResetTimer();
+            if (!GameManager.instance.isGameOver)
+            {
+                SpawnCoin();
+                ResetTimer();
+            }
         }
     }
 

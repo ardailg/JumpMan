@@ -5,25 +5,14 @@ using UnityEngine;
 public class PlayerDie : MonoBehaviour
 {
     public Transform character;
-    public Transform[] enemies;
     public float deathDistance;
     public BackgroundController backgroundController;
-
-    void Start()
-    {
-        // Find all enemy objects in the scene and store their transforms in the 'enemies' array
-        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
-        enemies = new Transform[enemyObjects.Length];
-        for (int i = 0; i < enemyObjects.Length; i++)
-        {
-            enemies[i] = enemyObjects[i].transform;
-        }
-    }
-
+    
     void Update()
     {
-        foreach (Transform enemy in enemies)
+        foreach (GameObject enemyObject in ObjectPoolEnemy.instance.activePooledEnemy)
         {
+            Transform enemy = enemyObject.transform;
             // Calculate the distance between the player and each enemy
             float distanceToEnemy = Vector2.Distance(character.position, enemy.position);
 

@@ -9,7 +9,7 @@ public class CoinController : MonoBehaviour
 
     public void StopSpawnCoin()
     {
-        if (playerDie != null && coinSpawn != null && playerDie.character.gameObject.activeSelf == false)
+        if ((playerDie != null) && (coinSpawn != null) && (playerDie.character.gameObject.activeSelf == false))
         {
             coinSpawn.enabled = false;
         }
@@ -17,8 +17,7 @@ public class CoinController : MonoBehaviour
     
     public void DeactivateExistingCoins()
     {
-        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
-        foreach (GameObject coinObject in coins)
+        foreach (GameObject coinObject in ObjectPool.instance.activePooledObjects) // pool'daki coinlerin içinde teker teker dönüyor ve SetActive(false) ediyor
         {
             coinObject.SetActive(false);
         }

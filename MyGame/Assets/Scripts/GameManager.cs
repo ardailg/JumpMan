@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public EnemyController enemyController;
     public CoinController coinController;
+
+    public bool isGameOver;
     private void Awake() // Singleton (instance kullanarak farklı scriptlerde erişebiliyorum), ayrıca GameManager'dan sadece bir tane olmasını sağlıyor
     {
         if (instance == null)
@@ -23,6 +25,9 @@ public class GameManager : MonoBehaviour
         
         enemyController.DeactivateExistingEnemies();
         coinController.DeactivateExistingCoins();
+        
+        //Debug.Log("Game Over!");
+
+        isGameOver = true;
     }
-    
 }

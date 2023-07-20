@@ -25,8 +25,11 @@ public class EnemySpawn : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            SpawnEnemy();
-            ResetTimer();
+            if (!GameManager.instance.isGameOver)
+            {
+                SpawnEnemy();
+                ResetTimer();
+            }
         }
     }
 

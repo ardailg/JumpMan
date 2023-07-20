@@ -14,7 +14,7 @@ public class Coin : MonoBehaviour
         if (transform.position.x <= -15) // Yaratılan coinler oyun alanından çıktıktan sonra -15 konumuna gelince tekrar object poola dönüyor 
         {
             gameObject.SetActive(false);
-            ObjectPool.instance.pooledObjects.Add(gameObject);
+            ObjectPool.instance.ReturnToPool(gameObject);
         }
     }
 }

@@ -8,33 +8,25 @@ using UnityEngine.UI;
 public class CoinCollection : MonoBehaviour
  {
      public Transform character; // Karakterin transform bileşeni
-     public Transform[] coins; // Coin'lerin transform bileşenleri
      public float minDistance;
      public Transform spawnPoint;
      public float verticalOffset;
-     private Score score;
-
-     void Start()
-     {
-         GameObject[] coinObjects = GameObject.FindGameObjectsWithTag("Coin");
-         coins = new Transform[coinObjects.Length];
-         
-         for (int i = 0; i < coinObjects.Length; i++)
-         {
-             coins[i] = coinObjects[i].transform;
-         }
- 
-         score = FindObjectOfType<Score>(); // Score script'ini bul ve referans al
-     }
- 
+     public Score score;
+     
      void Update()
      {
-         foreach (Transform coin in coins)
+         for (int i = 0; i < ObjectPool.instance.activePooledObjects.Count; i++)
          {
+             GameObject coinObject = ObjectPool.instance.activePooledObjects[i];
+             Transform coin = coinObject.transform;
+
              float distance = Vector2.Distance(character.position, coin.position);
-             if ((distance < minDistance) && (coin.gameObject.activeSelf)) // Coin pozisyonu değişecek if'e bir kere girmesi için 
+
+             if (distance < minDistance)
              {
                  CollectCoin(coin.gameObject);
+                 // activePooledObjects'den ayrılan coinler için index küçülttüm
+                 i--;
              }
          }
      }
@@ -50,7 +42,7 @@ public class CoinCollection : MonoBehaviour
              particle.SetActive(true);
          }
          
-         ObjectPool.instance.pooledObjects.Add(coin);
+         ObjectPool.instance.ReturnToPool(coin);
          
          Vector3 spawnPosition = spawnPoint.position + new Vector3(0f, verticalOffset, 0f);
          coin.transform.position = spawnPosition;

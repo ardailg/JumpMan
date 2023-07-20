@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 7866294491998883588}
   - component: {fileID: 7866294491998883593}
   - component: {fileID: 4025314306671971679}
+  - component: {fileID: 517658951110916660}
   m_Layer: 0
   m_Name: enemyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1846504855180043791
 Transform:
   m_ObjectHideFlags: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 51733563310168180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.8075, y: -1.68, z: 0}
-  m_LocalScale: {x: 0.17324468, y: 0.14647241, z: 1}
+  m_LocalScale: {x: 0.09536468, y: 0.12592423, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -140,3 +141,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad31679b7e6bf040830c70efde4d568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &517658951110916660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51733563310168180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572f74270553ead4d82d0ab3ae0d2203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  deathDistance: 1.75
+  backgroundController: {fileID: 0}

@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     
     public void StopSpawnEnemy()
     {
-        if (playerDie != null && enemySpawn != null && playerDie.character.gameObject.activeSelf == false)
+        if ((playerDie != null) && (enemySpawn != null) && (playerDie.character.gameObject.activeSelf == false))
         {
             enemySpawn.enabled = false;
         }
@@ -17,8 +17,7 @@ public class EnemyController : MonoBehaviour
     
     public void DeactivateExistingEnemies()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemyObject in enemies)
+        foreach (GameObject enemyObject in ObjectPoolEnemy.instance.activePooledEnemy) // pool'daki enemylerin içinde teker teker dönüyor ve SetActive(false) ediyor
         {
             enemyObject.SetActive(false);
         }

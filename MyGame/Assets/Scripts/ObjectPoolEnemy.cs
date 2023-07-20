@@ -7,6 +7,7 @@ public class ObjectPoolEnemy : MonoBehaviour
     public static ObjectPoolEnemy instance;
 
     public List<GameObject> pooledEnemy; //Objeleri List'de saklıyorum
+    public List<GameObject> activePooledEnemy;
 
     public int amountToPool;
 
@@ -15,6 +16,7 @@ public class ObjectPoolEnemy : MonoBehaviour
     private void Awake()
     {
         pooledEnemy = new List<GameObject>();
+        activePooledEnemy = new List<GameObject>();
 
         if (instance == null)
         {
@@ -38,19 +40,28 @@ public class ObjectPoolEnemy : MonoBehaviour
         {
             if (!pooledEnemy[i].activeInHierarchy)
             {
-                return pooledEnemy[i];
+                // Move the object from pooledObjects to activePooledObjects
+                GameObject obj = pooledEnemy[i];
+                pooledEnemy.RemoveAt(i);
+                activePooledEnemy.Add(obj);
+                obj.SetActive(true);
+
+                return obj;
             }
         }
 
-        GameObject obj = Instantiate(enemyPrefab, transform);
-        obj.SetActive(false);
-        pooledEnemy.Add(obj);
-        return obj;
+        GameObject newObj = Instantiate(enemyPrefab, transform);
+        newObj.SetActive(false);
+        activePooledEnemy.Add(newObj);
+        pooledEnemy.Add(newObj);
+        
+        return newObj;
     }
 
     public void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
+        activePooledEnemy.Remove(obj);
         pooledEnemy.Add(obj);
         obj.transform.position = transform.position;
     }

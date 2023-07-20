@@ -133,11 +133,10 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1846504855180043791, guid: 619d22414bce1c1428544d94816bb202, type: 3}
   m_PrefabInstance: {fileID: 7866294491967574338}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &40001102
+--- !u!114 &40001102 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 517658951110916660, guid: 619d22414bce1c1428544d94816bb202, type: 3}
+  m_PrefabInstance: {fileID: 7866294491967574338}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40001093}
   m_Enabled: 1
@@ -145,10 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572f74270553ead4d82d0ab3ae0d2203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 208913416}
-  enemies: []
-  deathDistance: 1.75
-  backgroundController: {fileID: 519420034}
 --- !u!1 &79510583
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,20 +615,12 @@ PrefabInstance:
       value: coinPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 1094285569838670900, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
-      propertyPath: m_TagString
-      value: Coin
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7949102624778713304, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7949102624778713304, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4830174
-      objectReference: {fileID: 0}
-    - target: {fileID: 7949102624778713304, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.38810256
       objectReference: {fileID: 0}
     - target: {fileID: 7949102624778713304, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
       propertyPath: m_LocalPosition.x
@@ -675,6 +662,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7994932013692182826, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
+      propertyPath: score
+      value: 
+      objectReference: {fileID: 1519022838}
     - target: {fileID: 7994932013692182826, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
       propertyPath: character
       value: 
@@ -940,7 +931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 770, y: 441}
+  m_AnchoredPosition: {x: 821, y: 449}
   m_SizeDelta: {x: 319.7, y: 98.6282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &793441669
@@ -965,8 +956,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -990,8 +981,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1026,7 +1017,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -114.775024, y: 0, z: 0, w: -25.289429}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6085,8 +6076,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 392335233}
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 3
+  minSpawnInterval: 2
+  maxSpawnInterval: 4
   coinSpeed: 4
   ObjectPool: {fileID: 1314908377}
 --- !u!4 &1311569989
@@ -6118,7 +6109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDie: {fileID: 40001102}
   coinSpawn: {fileID: 1311569988}
-  coin: {fileID: 392335232}
 --- !u!1 &1314908376
 GameObject:
   m_ObjectHideFlags: 0
@@ -6149,6 +6139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObjects: []
+  activePooledObjects: []
   amountToPool: 10
   coinPrefab: {fileID: 392335232}
 --- !u!4 &1314908378
@@ -6278,6 +6269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyController: {fileID: 1669796921}
   coinController: {fileID: 1311569990}
+  isGameOver: 0
 --- !u!4 &1381702847
 Transform:
   m_ObjectHideFlags: 0
@@ -6338,6 +6330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledEnemy: []
+  activePooledEnemy: []
   amountToPool: 15
   enemyPrefab: {fileID: 40001093}
 --- !u!1 &1519022837
@@ -6431,9 +6424,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 40001096}
-  minSpawnInterval: 3
-  maxSpawnInterval: 7
-  enemySpeed: 2
+  minSpawnInterval: 1
+  maxSpawnInterval: 5
+  enemySpeed: 3
   ObjectPoolEnemy: {fileID: 1483499128}
 --- !u!114 &1669796921
 MonoBehaviour:
@@ -6638,20 +6631,20 @@ PrefabInstance:
       value: Enemy_walk
       objectReference: {fileID: 0}
     - target: {fileID: 51733563310168180, guid: 619d22414bce1c1428544d94816bb202, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 517658951110916660, guid: 619d22414bce1c1428544d94816bb202, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 208913416}
+    - target: {fileID: 517658951110916660, guid: 619d22414bce1c1428544d94816bb202, type: 3}
+      propertyPath: backgroundController
+      value: 
+      objectReference: {fileID: 519420034}
     - target: {fileID: 1846504855180043791, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846504855180043791, guid: 619d22414bce1c1428544d94816bb202, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.09536468
-      objectReference: {fileID: 0}
-    - target: {fileID: 1846504855180043791, guid: 619d22414bce1c1428544d94816bb202, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.12592423
       objectReference: {fileID: 0}
     - target: {fileID: 1846504855180043791, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6693,6 +6686,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7866294491998883595, guid: 619d22414bce1c1428544d94816bb202, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 619d22414bce1c1428544d94816bb202, type: 3}

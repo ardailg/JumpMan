@@ -9,10 +9,11 @@ public class Enemy : MonoBehaviour
         CheckEnemyPosition();
     }
     
-    public void CheckEnemyPosition()
+    void CheckEnemyPosition()
     {
         if (transform.position.x <= -15) // Yaratılan enemyler oyun alanından çıktıktan sonra -15 konumuna gelince tekrar object poola dönüyor 
         {
+            gameObject.SetActive(false);
             ObjectPoolEnemy.instance.ReturnToPool(gameObject);
         }
     }

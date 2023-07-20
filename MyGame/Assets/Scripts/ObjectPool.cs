@@ -7,7 +7,8 @@ public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool instance;
 
-    public List<GameObject> pooledObjects; //Objeleri List'de saklıyorum
+    public List<GameObject> pooledObjects; // Objeleri List'de saklıyorum
+    public List<GameObject> activePooledObjects; // Aktif olan objeler için
 
     public int amountToPool;
 
@@ -16,6 +17,7 @@ public class ObjectPool : MonoBehaviour
     private void Awake()
     {
         pooledObjects = new List<GameObject>();
+        activePooledObjects = new List<GameObject>();
         
         if (instance == null)
         {
@@ -39,13 +41,29 @@ public class ObjectPool : MonoBehaviour
         {
             if (!pooledObjects[i].activeInHierarchy)
             {
-                return pooledObjects[i];
+                // Move the object from pooledObjects to activePooledObjects
+                GameObject obj = pooledObjects[i];
+                pooledObjects.RemoveAt(i);
+                activePooledObjects.Add(obj);
+                obj.SetActive(true);
+
+                return obj;
             }
         }
         
-        GameObject obj = Instantiate(coinPrefab, transform);
+        GameObject newObj = Instantiate(coinPrefab, transform);
+        newObj.SetActive(true);
+        activePooledObjects.Add(newObj);
+        pooledObjects.Add(newObj);
+
+        return newObj;
+    }
+
+    public void ReturnToPool(GameObject obj)
+    {
         obj.SetActive(false);
+        activePooledObjects.Remove(obj);
         pooledObjects.Add(obj);
-        return obj;
+        obj.transform.position = transform.position;
     }
 }
