@@ -7,10 +7,13 @@ public class EnemySpawn : MonoBehaviour
     public Transform spawnPoint;
     public float minSpawnInterval;
     public float maxSpawnInterval;
-    public float enemySpeed;
+    private float enemySpeed;
 
     private float timer;
     private float spawnInterval;
+
+    public float initialEnemySpeed;
+    public float maxEnemySpeed;
 
     public ObjectPoolEnemy ObjectPoolEnemy;
 
@@ -29,6 +32,9 @@ public class EnemySpawn : MonoBehaviour
             {
                 SpawnEnemy();
                 ResetTimer();
+
+                // Mathf.Clamp fonksiyonu hızın iki değer arasında kalmasını maksimum değeri aşmamasını sağlıyor
+                enemySpeed = Mathf.Clamp(initialEnemySpeed * GameManager.instance.gameSpeed, initialEnemySpeed, maxEnemySpeed);
             }
         }
     }

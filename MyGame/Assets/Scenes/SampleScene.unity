@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 208913418}
   - component: {fileID: 208913419}
   m_Layer: 0
-  m_Name: Player_walk
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d945180231073444593fa938194a65e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAmount: 6
+  moveSpeed: 4
   jumpAmount: 7
 --- !u!50 &208913418
 Rigidbody2D:
@@ -612,7 +612,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1094285569838670900, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
       propertyPath: m_Name
-      value: coinPrefab
+      value: Coin
       objectReference: {fileID: 0}
     - target: {fileID: 1094285569838670900, guid: 6d8fcb06c633cf742974a9b760dbc109, type: 3}
       propertyPath: m_IsActive
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -780,7 +780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c2844e6b9bbed48b010e31607d310e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopSpeed: 2
+  initialLoopSpeed: 3
+  maxLoopSpeed: 20
   backgroundTransform: {fileID: 1825011190}
 --- !u!114 &519420034
 MonoBehaviour:
@@ -6076,9 +6077,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 392335233}
-  minSpawnInterval: 2
-  maxSpawnInterval: 4
-  coinSpeed: 4
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 2.5
+  initialCoinSpeed: 3
+  maxCoinSpeed: 8
   ObjectPool: {fileID: 1314908377}
 --- !u!4 &1311569989
 Transform:
@@ -6187,7 +6189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledParticles: []
-  amountToPool: 5
+  activePooledParticles: []
+  amountToPool: 10
   particle: {fileID: 1303216913}
 --- !u!4 &1321828255
 Transform:
@@ -6270,6 +6273,8 @@ MonoBehaviour:
   enemyController: {fileID: 1669796921}
   coinController: {fileID: 1311569990}
   isGameOver: 0
+  gameSpeed: 1
+  accelerationRate: 0.05
 --- !u!4 &1381702847
 Transform:
   m_ObjectHideFlags: 0
@@ -6424,9 +6429,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 40001096}
-  minSpawnInterval: 1
-  maxSpawnInterval: 5
-  enemySpeed: 3
+  minSpawnInterval: 1.75
+  maxSpawnInterval: 3
+  initialEnemySpeed: 3
+  maxEnemySpeed: 8
   ObjectPoolEnemy: {fileID: 1483499128}
 --- !u!114 &1669796921
 MonoBehaviour:
@@ -6628,7 +6634,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 51733563310168180, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: m_Name
-      value: Enemy_walk
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 51733563310168180, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: m_IsActive

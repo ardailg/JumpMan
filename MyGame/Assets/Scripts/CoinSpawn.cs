@@ -7,10 +7,13 @@ public class CoinSpawn : MonoBehaviour
     public Transform spawnPoint;
     public float minSpawnInterval;
     public float maxSpawnInterval;
-    public float coinSpeed;
+    private float coinSpeed;
 
     private float timer;
     private float spawnInterval;
+
+    public float initialCoinSpeed;
+    public float maxCoinSpeed;
 
     public ObjectPool ObjectPool;
 
@@ -29,6 +32,9 @@ public class CoinSpawn : MonoBehaviour
             {
                 SpawnCoin();
                 ResetTimer();
+                
+                // Mathf.Clamp fonksiyonu hızın iki değer arasında kalmasını maksimum değeri aşmamasını sağlıyor
+                coinSpeed = Mathf.Clamp(initialCoinSpeed * GameManager.instance.gameSpeed, initialCoinSpeed, maxCoinSpeed);
             }
         }
     }

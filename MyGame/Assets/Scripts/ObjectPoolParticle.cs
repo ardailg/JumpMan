@@ -7,6 +7,7 @@ public class ObjectPoolParticle : MonoBehaviour
     public static ObjectPoolParticle instance;
 
     public List<GameObject> pooledParticles; //Objeleri List'de saklıyorum
+    public List<GameObject> activePooledParticles; // Aktif olan objeler için
 
     public int amountToPool;
 
@@ -15,6 +16,7 @@ public class ObjectPoolParticle : MonoBehaviour
     private void Awake()
     {
         pooledParticles = new List<GameObject>();
+        activePooledParticles = new List<GameObject>();
         
         if (instance == null)
         {
@@ -38,22 +40,29 @@ public class ObjectPoolParticle : MonoBehaviour
         {
             if (!pooledParticles[i].activeInHierarchy)
             {
-                //StartDisableParticleCoroutine(particle, 2f);
-                pooledParticles[i].SetActive(true);
-                StartDisableParticleCoroutine(pooledParticles[i], 2f);
-                return pooledParticles[i];
+                GameObject obj = pooledParticles[i];
+                pooledParticles.RemoveAt(i);
+                activePooledParticles.Add(obj);
+                obj.SetActive(true);
+                
+                StartDisableParticleCoroutine(obj, 2f); // StartDisableParticleCoroutine(particle, 2f);
+
+                return obj;
             }
         }
 
-        GameObject obj = Instantiate(particle, transform);
-        obj.SetActive(false);
-        pooledParticles.Add(obj);
-        return obj;
+        GameObject newObj = Instantiate(particle, transform);
+        newObj.SetActive(false);
+        activePooledParticles.Add(newObj);
+        pooledParticles.Add(newObj);
+        
+        return newObj;
     }
     
     public void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
+        activePooledParticles.Remove(obj);
         pooledParticles.Add(obj);
         obj.transform.position = transform.position;
         obj.GetComponent<ParticleSystem>().Clear();

@@ -46,7 +46,7 @@ public class CoinCollection : MonoBehaviour
          
          Vector3 spawnPosition = spawnPoint.position + new Vector3(0f, verticalOffset, 0f);
          coin.transform.position = spawnPosition;
-
+                
          score.UpdateScore();
      }
  }

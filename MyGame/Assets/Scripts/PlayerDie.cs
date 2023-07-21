@@ -24,7 +24,7 @@ public class PlayerDie : MonoBehaviour
             }
         }
     }
-
+    
     public void CharacterDeath()
     {
         character.gameObject.SetActive(false);
