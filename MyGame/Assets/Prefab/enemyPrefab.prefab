@@ -154,5 +154,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  deathDistance: 1.75
+  deathDistance: 1.85
   backgroundController: {fileID: 0}

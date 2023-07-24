@@ -154,6 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  hairCenter: {fileID: 0}
+  feetCenter: {fileID: 0}
+  feetTouchDistance: 1
+  hairTouchDistance: 1
   minDistance: 1
   spawnPoint: {fileID: 7949102624778713304}
   verticalOffset: 2

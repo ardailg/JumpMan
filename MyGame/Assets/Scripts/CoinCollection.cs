@@ -8,6 +8,10 @@ using UnityEngine.UI;
 public class CoinCollection : MonoBehaviour
  {
      public Transform character; // Karakterin transform bileşeni
+     public Transform hairCenter; // Karakterin saçının transform bileşeni
+     public Transform feetCenter; //Karakterin ayaklarının transform bileşeni
+     public float feetTouchDistance;
+     public float hairTouchDistance;
      public float minDistance;
      public Transform spawnPoint;
      public float verticalOffset;
@@ -19,10 +23,12 @@ public class CoinCollection : MonoBehaviour
          {
              GameObject coinObject = ObjectPool.instance.activePooledObjects[i];
              Transform coin = coinObject.transform;
+             
+             float distanceToCharacter = Vector2.Distance(character.position, coin.position);
+             float distanceToHair = Vector2.Distance(hairCenter.position, coin.position);
+             float distanceToFeet = Vector2.Distance(feetCenter.position, coin.position);
 
-             float distance = Vector2.Distance(character.position, coin.position);
-
-             if (distance < minDistance)
+             if (distanceToCharacter < minDistance || distanceToHair < hairTouchDistance || distanceToFeet < feetTouchDistance)
              {
                  CollectCoin(coin.gameObject);
                  // activePooledObjects'den ayrılan coinler için index küçülttüm

@@ -33,6 +33,9 @@ public class CoinSpawn : MonoBehaviour
                 SpawnCoin();
                 ResetTimer();
                 
+                // Coin spawn interval'ını oyun hızına bağlı olarak ayarlama
+                spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval) / GameManager.instance.gameSpeed;
+                
                 // Mathf.Clamp fonksiyonu hızın iki değer arasında kalmasını maksimum değeri aşmamasını sağlıyor
                 coinSpeed = Mathf.Clamp(initialCoinSpeed * GameManager.instance.gameSpeed, initialCoinSpeed, maxCoinSpeed);
             }
@@ -51,7 +54,7 @@ public class CoinSpawn : MonoBehaviour
 
         if (newCoin != null)
         {
-            float verticalOffset = Random.Range(-1.5f, 2f);
+            float verticalOffset = Random.Range(-1f, 4f);
             Vector3 spawnPosition = spawnPoint.position + new Vector3(0f, verticalOffset, 0f);
             newCoin.transform.position = spawnPosition;
             

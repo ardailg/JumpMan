@@ -33,6 +33,9 @@ public class EnemySpawn : MonoBehaviour
                 SpawnEnemy();
                 ResetTimer();
 
+                // Enemy spawn interval'ını oyun hızına bağlı olarak ayarlama
+                spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval) / GameManager.instance.gameSpeed;
+                
                 // Mathf.Clamp fonksiyonu hızın iki değer arasında kalmasını maksimum değeri aşmamasını sağlıyor
                 enemySpeed = Mathf.Clamp(initialEnemySpeed * GameManager.instance.gameSpeed, initialEnemySpeed, maxEnemySpeed);
             }
