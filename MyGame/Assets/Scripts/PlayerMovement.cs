@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
         }
-
+        
         // Zıplama kontrolü
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
