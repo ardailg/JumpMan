@@ -30,6 +30,7 @@ public class CoinCollection : MonoBehaviour
 
              if (distanceToCharacter < minDistance || distanceToHair < hairTouchDistance || distanceToFeet < feetTouchDistance)
              {
+                 SoundManager.instance.coinSource.PlayOneShot(SoundManager.instance.coinSound); // Coinleri toplama Sound'u ekledim
                  CollectCoin(coin.gameObject);
                  // activePooledObjects'den ayrılan coinler için index küçülttüm
                  i--;

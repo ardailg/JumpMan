@@ -48,7 +48,7 @@ public class EnemySpawn : MonoBehaviour
         spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
     
-    void SpawnEnemy()
+    public void SpawnEnemy()
     {
         GameObject newEnemy = ObjectPoolEnemy.GetPooledObject();
 

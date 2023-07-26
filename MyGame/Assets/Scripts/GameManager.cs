@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public PlayerMovement playerMovement;
+    public BackgroundController backgroundController;
     public EnemyController enemyController;
     public CoinController coinController;
 
@@ -17,18 +19,24 @@ public class GameManager : MonoBehaviour
     
     public float gameSpeed = 1f;
     public float accelerationRate;
-
-    [SerializeField] private GameObject UIManager;
+    
+    [SerializeField] private GameObject GameOverPanel;
+    [SerializeField] private GameObject StartPanel;
     
     public TextMeshProUGUI yourScore;
     public TextMeshProUGUI highScoresText;
+    public TextMeshProUGUI score;
 
     public Score Score;
-    public ScoreManager ScoreManager;
-    
+
+    public Animator characterAnimator;
+    public GameObject character;
+
     private void Awake() // Singleton (instance kullanarak farklı scriptlerde erişebiliyorum), ayrıca GameManager'dan sadece bir tane olmasını sağlıyor
     {
-        UIManager.SetActive(false);
+        GameOverPanel.SetActive(false);
+        characterAnimator = character.GetComponent<Animator>();
+        playerMovement = character.GetComponent<PlayerMovement>();
         
         if (instance == null)
         {
@@ -36,13 +44,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        StartPanel.SetActive(true);
+
+        playerMovement.canMove = false;
+        characterAnimator.enabled = false;
+        backgroundController.scrollingBackground.enabled = false;
+        coinController.coinSpawn.enabled = false;
+        enemyController.enemySpawn.enabled = false;
+    }
+
     void Update()
     {
-        if (!isGameOver)
+        // Add game start check
+        if (!isGameOver && !isGameStarted && Input.GetKeyDown(KeyCode.Space))
+        {
+            StartToPlay();
+        }
+
+        if (!isGameOver && isGameStarted)
         {
             gameSpeed += accelerationRate * Time.deltaTime; // Oyunun hızı zamanla artıyor
         }
-        
     }
     
     public void OnGameOver()
@@ -54,14 +78,15 @@ public class GameManager : MonoBehaviour
         coinController.DeactivateExistingCoins();
         
         isGameOver = true;
+        isGameStarted = false;
         
-        UIManager.SetActive(true);
+        GameOverPanel.SetActive(true);
         
         Score.CoinCountText.gameObject.SetActive(false);
-        
+
         YourScore();
         
-        ScoreManager.SaveHighScore(Score.coinCount); // Skorları kaydediyorum
+        ScoreManager.instance.SaveHighScore(Score.coinCount); // Skorları kaydediyorum
 
         ShowHighScores();
     }
@@ -78,9 +103,9 @@ public class GameManager : MonoBehaviour
     
     public void ShowHighScores()
     {
-        List<int> highScores = ScoreManager.GetHighScores();
+        List<int> highScores = ScoreManager.instance.GetHighScores();
 
-        string highScoresText = "Top 3 Scores" + "\n";
+        string highScoresText = "Top 3 Scores" + "\n****************\n";
 
         for (int i = 0; i < highScores.Count; i++)
         {
@@ -88,5 +113,22 @@ public class GameManager : MonoBehaviour
         }
 
         this.highScoresText.text = highScoresText; // highScoresText değişkeni dışarıdaki highScoresText bileşenini temsil ediyor.
+    }
+
+    private bool isGameStarted;
+
+    public void StartToPlay()
+    {
+        StartPanel.SetActive(false);
+
+        score.gameObject.SetActive(true);
+        playerMovement.canMove = true;
+        characterAnimator.enabled = true;
+        backgroundController.scrollingBackground.enabled = true;
+        coinController.coinSpawn.enabled = true;
+        enemyController.enemySpawn.enabled = true;
+      
+        // Set the game as started
+        isGameStarted = true;
     }
 }

@@ -48,7 +48,7 @@ public class CoinSpawn : MonoBehaviour
         spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
     
-    void SpawnCoin()
+    public void SpawnCoin()
     {
         GameObject newCoin = ObjectPool.GetPooledObject();
 
