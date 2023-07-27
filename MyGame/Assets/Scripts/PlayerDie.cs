@@ -27,6 +27,7 @@ public class PlayerDie : MonoBehaviour
     
     public void CharacterDeath()
     {
+        GameOverSoundManager.instance.gameOverSource.PlayOneShot(GameOverSoundManager.instance.gameOverSound); // Game Over Sound'u ekledim
         character.gameObject.SetActive(false);
         //Debug.Log("Player Died!");
         backgroundController.StopBackground();

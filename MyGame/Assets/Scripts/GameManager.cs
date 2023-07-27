@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,8 @@ public class GameManager : MonoBehaviour
     public BackgroundController backgroundController;
     public EnemyController enemyController;
     public CoinController coinController;
-
+    public Score Score;
+    
     public bool isGameOver;
     
     public float gameSpeed = 1f;
@@ -26,9 +28,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI yourScore;
     public TextMeshProUGUI highScoresText;
     public TextMeshProUGUI score;
-
-    public Score Score;
-
+    
     public Animator characterAnimator;
     public GameObject character;
 
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        MusicManager.instance.gameSource.PlayOneShot(MusicManager.instance.gameMusic); // Game Music ekledim
         StartPanel.SetActive(true);
 
         playerMovement.canMove = false;
@@ -57,6 +58,14 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (!isGameOver && !isGameStarted)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                QuitGame();
+            }
+        }
+
         // Add game start check
         if (!isGameOver && !isGameStarted && Input.GetKeyDown(KeyCode.Space))
         {
@@ -71,6 +80,8 @@ public class GameManager : MonoBehaviour
     
     public void OnGameOver()
     {
+        MusicManager.instance.gameSource.Stop(); // Game Over olunca müziği durdurdum
+        
         enemyController.StopSpawnEnemy();
         coinController.StopSpawnCoin();
         
@@ -89,9 +100,19 @@ public class GameManager : MonoBehaviour
         ScoreManager.instance.SaveHighScore(Score.coinCount); // Skorları kaydediyorum
 
         ShowHighScores();
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            QuitGame();
+        }
     }
 
-    public void Restart()
+    public void RestartGame()
     {
         SceneManager.LoadScene(0);
     }
@@ -130,5 +151,14 @@ public class GameManager : MonoBehaviour
       
         // Set the game as started
         isGameStarted = true;
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

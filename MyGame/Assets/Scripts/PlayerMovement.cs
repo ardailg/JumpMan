@@ -47,12 +47,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (isGrounded) // Yere temas varsa
                 {
+                    SoundManager.instance.jumpSource.PlayOneShot(SoundManager.instance.jumpSound); // Jump Sound'u ekledim
                     // Yere temas varken zıplama
                     rgb.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);
                     canDoubleJump = true; // Çift zıplama izni aç
                 }
                 else if (canDoubleJump && jumpCount < 1) // Havadayken çift zıplama
                 {
+                    SoundManager.instance.jumpSource.PlayOneShot(SoundManager.instance.jumpSound); // Jump Sound'u ekledim
                     rgb.velocity = new Vector2(rgb.velocity.x, 0f); // Yatay hızı korumak için y eksenini sıfırladı
                     rgb.AddForce(Vector3.up * jumpAmount, ForceMode2D.Impulse);
                     jumpCount++; // Zıplama sayacını artır

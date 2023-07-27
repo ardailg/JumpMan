@@ -1,16 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class GameOverSoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static GameOverSoundManager instance;
     
-    public AudioSource coinSource;
-    public AudioClip coinSound;
-    public AudioSource jumpSource;
-    public AudioClip jumpSound;
+    public AudioSource gameOverSource;
+    public AudioClip gameOverSound;
     
     private void Awake() // Singleton (instance kullanarak farklı scriptlerde erişebiliyorum), ayrıca SoundManager'dan sadece bir tane olmasını sağlıyor
     {
