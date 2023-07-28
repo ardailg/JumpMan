@@ -9,10 +9,19 @@ public class ScrollingBackground : MonoBehaviour
 {
     public float initialLoopSpeed;
     public float maxLoopSpeed;
-    
     private float loopSpeed;
+    private float loopPoint = -17.73f; // -17.73
+    
+    private bool transition;
+
+    private Vector3 startPosition;
     
     public Transform backgroundTransform;
+
+    void Start()
+    {
+        startPosition = backgroundTransform.position;
+    }
     
     void Update()
     {
@@ -28,11 +37,23 @@ public class ScrollingBackground : MonoBehaviour
         Vector3 newPosition = new Vector3(x, y, z); //yeni pozisyonu Vektör3'e tanımladım
         backgroundTransform.position = newPosition;
 
-        // -17.73
-        if (backgroundTransform.position.x < -17.73f)
+        if (!transition && Mathf.Approximately(loopSpeed, maxLoopSpeed))
         {
-            Vector3 startPosition = new Vector3(0, 0, 0);
+            transition = true;
+            StartTransition();
+        }
+        
+        if (backgroundTransform.position.x < loopPoint)
+        {
             backgroundTransform.position = startPosition;
         }
     }
+    
+    private void StartTransition() // yeni backgrounda geçiş
+    {
+        loopPoint = -54.84f;
+
+        startPosition.x = -35.69f;
+    }
+    
 }
