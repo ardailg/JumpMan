@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class BirdSpawn : MonoBehaviour
 {
     public Transform spawnPoint;
     
     public float minSpawnInterval;
     public float maxSpawnInterval;
-    private float enemySpeed;
+    private float birdSpeed;
 
     private float timer;
     private float spawnInterval;
 
-    public float initialEnemySpeed;
-    public float maxEnemySpeed;
+    public float initialBirdSpeed;
+    public float maxBirdSpeed;
 
-    public ObjectPoolEnemy ObjectPoolEnemy;
+    public ObjectPoolBird ObjectPoolBird;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class EnemySpawn : MonoBehaviour
                 spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval) / GameManager.instance.gameSpeed;
                 
                 // Mathf.Clamp fonksiyonu hızın iki değer arasında kalmasını maksimum değeri aşmamasını sağlıyor
-                enemySpeed = Mathf.Clamp(initialEnemySpeed * GameManager.instance.gameSpeed, initialEnemySpeed, maxEnemySpeed);
+                birdSpeed = Mathf.Clamp(initialBirdSpeed * GameManager.instance.gameSpeed, initialBirdSpeed, maxBirdSpeed);
             }
         }
     }
@@ -51,7 +51,7 @@ public class EnemySpawn : MonoBehaviour
     
     public void SpawnEnemy()
     {
-        GameObject newEnemy = ObjectPoolEnemy.GetPooledObject();
+        GameObject newEnemy = ObjectPoolBird.GetPooledObject();
 
         if (newEnemy != null)
         {
@@ -61,7 +61,7 @@ public class EnemySpawn : MonoBehaviour
             newEnemy.SetActive(true);
 
             Rigidbody2D rgb = newEnemy.GetComponent<Rigidbody2D>();
-            rgb.velocity = Vector2.left * enemySpeed;
+            rgb.velocity = Vector2.left * birdSpeed;
         }
     }
 }

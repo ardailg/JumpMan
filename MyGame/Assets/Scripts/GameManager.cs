@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public BackgroundController backgroundController;
     public EnemyController enemyController;
     public CoinController coinController;
+    public BirdController birdController;
     public Score Score;
     
     public bool isGameOver;
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         backgroundController.scrollingBackground.enabled = false;
         coinController.coinSpawn.enabled = false;
         enemyController.enemySpawn.enabled = false;
+        birdController.birdSpawn.enabled = false;
     }
 
     void Update()
@@ -80,13 +82,15 @@ public class GameManager : MonoBehaviour
     
     public void OnGameOver()
     {
-        MusicManager.instance.gameSource.Stop(); // Game Over olunca müziği durdurdum
+        MusicManager.instance.gameSource2.Stop(); // Game Over olunca müziği durdurdum
         
         enemyController.StopSpawnEnemy();
         coinController.StopSpawnCoin();
+        birdController.StopSpawnBird();
         
         enemyController.DeactivateExistingEnemies();
         coinController.DeactivateExistingCoins();
+        birdController.DeactivateExistingBird();
         
         isGameOver = true;
         isGameStarted = false;
@@ -148,11 +152,13 @@ public class GameManager : MonoBehaviour
         backgroundController.scrollingBackground.enabled = true;
         coinController.coinSpawn.enabled = true;
         enemyController.enemySpawn.enabled = true;
-      
+
+        birdController.birdSpawn.enabled = false;
+        
         // Set the game as started
         isGameStarted = true;
     }
-
+    
     public void QuitGame()
     {
 #if UNITY_EDITOR
