@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BirdSpawn : MonoBehaviour
 {
-    public Transform spawnPoint;
+    public Transform birdSpawnPoint;
     
     public float minSpawnInterval;
     public float maxSpawnInterval;
@@ -31,7 +31,7 @@ public class BirdSpawn : MonoBehaviour
         {
             if (!GameManager.instance.isGameOver)
             {
-                SpawnEnemy();
+                SpawnBird();
                 ResetTimer();
 
                 // Enemy spawn interval'ını oyun hızına bağlı olarak ayarlama
@@ -49,18 +49,21 @@ public class BirdSpawn : MonoBehaviour
         spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
     }
     
-    public void SpawnEnemy()
+    public void SpawnBird()
     {
-        GameObject newEnemy = ObjectPoolBird.GetPooledObject();
+        GameObject newBird = ObjectPoolBird.GetPooledObject();
 
-        if (newEnemy != null)
+        Bird bird = newBird.GetComponent<Bird>();
+        bird.canShoot = true;
+        
+        if (newBird != null)
         {
-            Vector3 spawnPosition = spawnPoint.position;
-            newEnemy.transform.position = spawnPosition;
+            Vector3 spawnPosition = birdSpawnPoint.position;
+            newBird.transform.position = spawnPosition;
             
-            newEnemy.SetActive(true);
+            newBird.SetActive(true);
 
-            Rigidbody2D rgb = newEnemy.GetComponent<Rigidbody2D>();
+            Rigidbody2D rgb = newBird.GetComponent<Rigidbody2D>();
             rgb.velocity = Vector2.left * birdSpeed;
         }
     }

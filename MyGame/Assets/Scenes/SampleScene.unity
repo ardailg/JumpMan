@@ -1568,10 +1568,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034c4f3ad72397141a6bbbaf84edf8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 1816197283}
-  minSpawnInterval: 4
-  maxSpawnInterval: 12
-  initialBirdSpeed: 2
+  birdSpawnPoint: {fileID: 1816197283}
+  minSpawnInterval: 1
+  maxSpawnInterval: 6
+  initialBirdSpeed: 3
   maxBirdSpeed: 6
   ObjectPoolBird: {fileID: 1266302804}
 --- !u!4 &573315705
@@ -7660,6 +7660,54 @@ Transform:
   m_Father: {fileID: 1326157016}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1324132829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1324132830}
+  - component: {fileID: 1324132831}
+  m_Layer: 0
+  m_Name: ObjectPoolBomb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1324132830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324132829}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1326157016}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1324132831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324132829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff091df556fb45468539290352bca40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledBombs: []
+  activePooledBombs: []
+  amountToPool: 15
+  bomb: {fileID: 1890041212503743808, guid: 063bfa571a7235441aa8e46dd1da7874, type: 3}
 --- !u!1 &1326157015
 GameObject:
   m_ObjectHideFlags: 0
@@ -7692,6 +7740,7 @@ Transform:
   - {fileID: 1321828255}
   - {fileID: 1483499127}
   - {fileID: 1266302805}
+  - {fileID: 1324132830}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8336,7 +8385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1669796919
 Transform:
   m_ObjectHideFlags: 0
@@ -8365,10 +8414,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 40001096}
-  minSpawnInterval: 4
-  maxSpawnInterval: 10
+  minSpawnInterval: 3
+  maxSpawnInterval: 12
   initialEnemySpeed: 4
-  maxEnemySpeed: 10
+  maxEnemySpeed: 8
   ObjectPoolEnemy: {fileID: 1483499128}
 --- !u!114 &1669796921
 MonoBehaviour:
@@ -9317,11 +9366,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5829587385743652235, guid: 34671ba521074e84696bdaa31693415a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.1
+      value: 11.55
       objectReference: {fileID: 0}
     - target: {fileID: 5829587385743652235, guid: 34671ba521074e84696bdaa31693415a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.46
+      value: 4.36
       objectReference: {fileID: 0}
     - target: {fileID: 5829587385743652235, guid: 34671ba521074e84696bdaa31693415a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9355,6 +9404,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8160628205273255508, guid: 34671ba521074e84696bdaa31693415a, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 208913416}
+    - target: {fileID: 8160628205273255508, guid: 34671ba521074e84696bdaa31693415a, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 208913417}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34671ba521074e84696bdaa31693415a, type: 3}
 --- !u!114 &5741363648828152076 stripped
@@ -9381,7 +9438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 51733563310168180, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 517658951110916660, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: character

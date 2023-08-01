@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8160628205273255508}
   - component: {fileID: 109148228739430437}
   m_Layer: 0
-  m_Name: enemy2Prefab
+  m_Name: birdPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,6 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c37d90db6de4e24eab2d51cd5c03b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 1890041212503743808, guid: 063bfa571a7235441aa8e46dd1da7874, type: 3}
+  character: {fileID: 0}
+  shootDistance: 3
 --- !u!114 &109148228739430437
 MonoBehaviour:
   m_ObjectHideFlags: 0
