@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public EnemyController enemyController;
     public CoinController coinController;
     public BirdController birdController;
+    public BombController bombController;
     public Score Score;
     
     public bool isGameOver;
@@ -78,10 +79,24 @@ public class GameManager : MonoBehaviour
         {
             gameSpeed += accelerationRate * Time.deltaTime; // Oyunun hızı zamanla artıyor
         }
+
+        if (isGameOver)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                RestartGame();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                QuitGame();
+            }
+        }
     }
     
     public void OnGameOver()
     {
+        MusicManager.instance.gameSource.Stop();
         MusicManager.instance.gameSource2.Stop(); // Game Over olunca müziği durdurdum
         
         enemyController.StopSpawnEnemy();
@@ -91,6 +106,8 @@ public class GameManager : MonoBehaviour
         enemyController.DeactivateExistingEnemies();
         coinController.DeactivateExistingCoins();
         birdController.DeactivateExistingBird();
+
+        bombController.DeactivateExistingBomb();
         
         isGameOver = true;
         isGameStarted = false;
@@ -104,16 +121,6 @@ public class GameManager : MonoBehaviour
         ScoreManager.instance.SaveHighScore(Score.coinCount); // Skorları kaydediyorum
 
         ShowHighScores();
-        
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RestartGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            QuitGame();
-        }
     }
 
     public void RestartGame()

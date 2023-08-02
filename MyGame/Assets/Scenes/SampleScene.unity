@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  jumpAmount: 10
+  jumpAmount: 9.5
   gravityMultiplier: 1
   canMove: 1
 --- !u!50 &208913418
@@ -1474,7 +1474,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 0
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -1509,7 +1509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialLoopSpeed: 3
-  maxLoopSpeed: 4
+  maxLoopSpeed: 10
   backgroundTransform: {fileID: 1825011190}
 --- !u!114 &519420034
 MonoBehaviour:
@@ -1535,6 +1535,7 @@ GameObject:
   - component: {fileID: 573315705}
   - component: {fileID: 573315704}
   - component: {fileID: 573315703}
+  - component: {fileID: 573315706}
   m_Layer: 0
   m_Name: BirdSpawner
   m_TagString: Untagged
@@ -1569,10 +1570,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   birdSpawnPoint: {fileID: 1816197283}
-  minSpawnInterval: 1
-  maxSpawnInterval: 6
+  minSpawnInterval: 4
+  maxSpawnInterval: 10
   initialBirdSpeed: 3
-  maxBirdSpeed: 6
+  maxBirdSpeed: 10
   ObjectPoolBird: {fileID: 1266302804}
 --- !u!4 &573315705
 Transform:
@@ -1589,6 +1590,18 @@ Transform:
   m_Father: {fileID: 1077682951}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573315706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573315702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc0abab17b6f0047b3a4dff3f871193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &772794016
 GameObject:
   m_ObjectHideFlags: 0
@@ -7530,8 +7543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 392335233}
-  minSpawnInterval: 1
-  maxSpawnInterval: 2
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 1.75
   initialCoinSpeed: 4
   maxCoinSpeed: 10
   ObjectPool: {fileID: 1314908377}
@@ -7779,10 +7792,11 @@ MonoBehaviour:
   enemyController: {fileID: 1669796921}
   coinController: {fileID: 1311569990}
   birdController: {fileID: 573315703}
+  bombController: {fileID: 573315706}
   Score: {fileID: 1519022838}
   isGameOver: 0
   gameSpeed: 1
-  accelerationRate: 0.1
+  accelerationRate: 0.05
   GameOverPanel: {fileID: 365760506}
   StartPanel: {fileID: 2025158901}
   yourScore: {fileID: 120838927}
@@ -8385,7 +8399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1669796919
 Transform:
   m_ObjectHideFlags: 0
@@ -8414,10 +8428,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 40001096}
-  minSpawnInterval: 3
-  maxSpawnInterval: 12
+  minSpawnInterval: 4
+  maxSpawnInterval: 9
   initialEnemySpeed: 4
-  maxEnemySpeed: 8
+  maxEnemySpeed: 10
   ObjectPoolEnemy: {fileID: 1483499128}
 --- !u!114 &1669796921
 MonoBehaviour:
@@ -9356,6 +9370,14 @@ PrefabInstance:
       propertyPath: backgroundController
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 357346472315772475, guid: 34671ba521074e84696bdaa31693415a, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 208913416}
+    - target: {fileID: 357346472315772475, guid: 34671ba521074e84696bdaa31693415a, type: 3}
+      propertyPath: backgroundController
+      value: 
+      objectReference: {fileID: 519420034}
     - target: {fileID: 5512067164862755147, guid: 34671ba521074e84696bdaa31693415a, type: 3}
       propertyPath: m_Name
       value: Bird
@@ -9438,7 +9460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 51733563310168180, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 517658951110916660, guid: 619d22414bce1c1428544d94816bb202, type: 3}
       propertyPath: character

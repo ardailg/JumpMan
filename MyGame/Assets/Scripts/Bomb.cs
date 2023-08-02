@@ -28,7 +28,7 @@ public class Bomb : MonoBehaviour
     
     public void CheckBombPosition()
     {
-        if (transform.position.y <= -10) // Yaratılan enemyler oyun alanından çıktıktan sonra -15 konumuna gelince tekrar object poola dönüyor 
+        if (transform.position.y <= -10) // Yaratılan bombalar oyun alanından çıktıktan sonra -10 konumuna gelince tekrar object poola dönüyor 
         {
             gameObject.SetActive(false);
             ObjectPoolBomb.instance.ReturnToPool(gameObject);

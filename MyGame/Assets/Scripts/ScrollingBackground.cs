@@ -63,7 +63,7 @@ public class ScrollingBackground : MonoBehaviour
     {
         float startVolume = MusicManager.instance.gameSource.volume;
         
-        float fadeDuration = 3.5f;
+        float fadeDuration = 2.5f;
         float currentTime = 0f;
 
         while (currentTime < fadeDuration)
@@ -87,7 +87,7 @@ public class ScrollingBackground : MonoBehaviour
         float targetVolume = MusicManager.instance.gameSource2.volume;
         MusicManager.instance.gameSource2.volume = 0f;
 
-        float fadeDuration = 0.5f;
+        float fadeDuration = 0.3f;
         float currentTime = 0f;
 
         while (currentTime < fadeDuration)
