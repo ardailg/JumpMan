@@ -49,12 +49,15 @@ public class ScrollingBackground : MonoBehaviour
         }
     }
 
-    private void StartTransition() // yeni backgrounda geçiş
+    public void StartTransition() // yeni backgrounda geçiş
     {
         loopPoint = -54.84f;
         startPosition.x = -35.69f;
         
         GameManager.instance.birdController.birdSpawn.enabled = true; // yeni müzik başlar başlamaz bird spawnlanmaya başlıyor
+        
+        // Set the bird spawning flag to true when transitioning to the new background
+        GameManager.instance.isBirdSpawningEnabled = true;
         
         StartCoroutine(FadeOutMusic());
     }
@@ -72,7 +75,7 @@ public class ScrollingBackground : MonoBehaviour
             MusicManager.instance.gameSource.volume = Mathf.Lerp(startVolume, 0f, currentTime / fadeDuration); // iki değer arasında bir ara değeri döndürmeye yarar
             yield return null;
         }
-
+        
         MusicManager.instance.gameSource.volume = 0f;
             
         MusicManager.instance.gameSource.Stop();

@@ -20,12 +20,15 @@ public class GameManager : MonoBehaviour
     public Score Score;
     
     public bool isGameOver;
+    private bool isGamePaused;
+    public bool isBirdSpawningEnabled = false;
     
     public float gameSpeed = 1f;
     public float accelerationRate;
-    
+
     [SerializeField] private GameObject GameOverPanel;
     [SerializeField] private GameObject StartPanel;
+    [SerializeField] private GameObject GamePausedPanel;
     
     public TextMeshProUGUI yourScore;
     public TextMeshProUGUI highScoresText;
@@ -48,7 +51,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        MusicManager.instance.gameSource.PlayOneShot(MusicManager.instance.gameMusic); // Game Music ekledim
+        MusicManager.instance.gameSource.clip = MusicManager.instance.gameMusic;
+        MusicManager.instance.gameSource.Play();
+        
         StartPanel.SetActive(true);
 
         playerMovement.canMove = false;
@@ -77,7 +82,26 @@ public class GameManager : MonoBehaviour
 
         if (!isGameOver && isGameStarted)
         {
-            gameSpeed += accelerationRate * Time.deltaTime; // Oyunun hızı zamanla artıyor
+            if (!isGamePaused)
+            {
+                gameSpeed += accelerationRate * Time.deltaTime; // Oyunun hızı zamanla artıyor
+            }
+            
+            // Pause the game on the first press of the Escape key
+            if (Input.GetKeyDown(KeyCode.Escape) && !isGamePaused)
+            {
+                PauseGame();
+            }
+            // Resume the game on the second press of the Escape key
+            else if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
+            {
+                ResumeGame();
+            }
+
+            if (isGamePaused && Input.GetKeyDown(KeyCode.Q))
+            {
+                QuitGame();
+            }
         }
 
         if (isGameOver)
@@ -162,8 +186,41 @@ public class GameManager : MonoBehaviour
 
         birdController.birdSpawn.enabled = false;
         
-        // Set the game as started
         isGameStarted = true;
+    }
+    
+    public void PauseGame()
+    {
+        isGamePaused = true;
+        Time.timeScale = 0f; // Pause the game by setting the time scale to zero
+
+        GamePausedPanel.SetActive(true);
+
+        playerMovement.canMove = false;
+        characterAnimator.enabled = false;
+        backgroundController.scrollingBackground.enabled = false;
+        coinController.coinSpawn.enabled = false;
+        enemyController.enemySpawn.enabled = false;
+        birdController.birdSpawn.enabled = false;
+    }
+
+    public void ResumeGame()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1f; // Resume the game by setting the time scale to one (normal time)
+
+        GamePausedPanel.SetActive(false);
+
+        playerMovement.canMove = true;
+        characterAnimator.enabled = true;
+        backgroundController.scrollingBackground.enabled = true;
+        coinController.coinSpawn.enabled = true;
+        enemyController.enemySpawn.enabled = true;
+
+        if (isGameStarted)
+        {
+            birdController.birdSpawn.enabled = isBirdSpawningEnabled;
+        }
     }
     
     public void QuitGame()

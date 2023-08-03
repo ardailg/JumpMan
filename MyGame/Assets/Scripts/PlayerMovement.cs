@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Zıplama kontrolü
-            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
+            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)))
             {
                 if (isGrounded) // Yere temas varsa
                 {
